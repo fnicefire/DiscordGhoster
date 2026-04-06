@@ -1,0 +1,5 @@
+# Venv (requirements.txt)
+.venv
+
+# PyCache
+__pycache__
