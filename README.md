@@ -18,7 +18,7 @@
     <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
   </a>
   <a href="https://discord.vortexnew.qzz.io">
-    <img src="https://img.shields.io/discord/1394391754077110363?style=for-the-badge&color=7289DA&logo=discord&logoColor=white&cacheSeconds=5" alt="Discord Server">
+    <img src="https://img.shields.io/discord/1394391754077110363?style=for-the-badge&color=7289DA&logo=discord&logoColor=white" alt="Discord Server">
   </a>
 </p>
 
