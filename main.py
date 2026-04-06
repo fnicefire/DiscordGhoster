@@ -7,7 +7,7 @@ import questionary
 from questionary import Choice
 
 # helpers
-from myhelpers import print_header, urls, clear, Author
+from myhelpers import print_header, urls, get_clickable_text, clear, Author
 
 # Colorama Colors Fixes
 init(autoreset=True)
@@ -93,14 +93,16 @@ class Ghoster(discord.Client):
 def main():
     print_header()
     
-    # 1. DISCLAIMER INIZIALE (Prima di tutto)
-    print(f"{Fore.RED}{'='*60}")
-    print(f"{Fore.RED}⚠️  LEGAL TERMINOLOGY & WARNING")
-    print(f"{Fore.WHITE}Using Self-bots (User Tokens) is strictly against Discord ToS.")
-    print(f"{Fore.WHITE}This can result in your account being PERMANENTLY BANNED.")
-    print(f"{Fore.WHITE}By proceeding, you agree that {Fore.CYAN}{Author}{Fore.WHITE} is NOT responsible")
-    print(f"{Fore.WHITE}for any damage or loss of your account.")
-    print(f"{Fore.RED}{'='*60}\n")
+    print(f"{Fore.RED}       LEGAL TERMINOLOGY & CRITICAL WARNING")
+    tos_link = get_clickable_text("Terms of Service (ToS).", "https://discord.com/terms")
+    author_link = get_clickable_text(Author, urls.get("Github", "#"))
+
+    print(f"{Fore.WHITE}This script {Fore.GREEN}ALLOWS{Fore.WHITE} the use of User Tokens (Self-bots),")
+    print(f"{Fore.WHITE}but you must know that this is {Fore.RED}ILLEGAL{Fore.WHITE} and strictly")
+    print(f"{Fore.WHITE}against Discord {Fore.YELLOW}{tos_link}")
+    print(f"{Fore.WHITE}Using this feature puts your account at {Fore.RED}HIGH RISK OF BAN.\n")
+    print(f"{Fore.WHITE}By proceeding, you agree that {Fore.MAGENTA}{author_link}{Fore.WHITE} is NOT responsible")
+    print(f"{Fore.WHITE}for any action taken by Discord against your account.\n")
 
     accept_risk = questionary.confirm("Do you accept the risks and responsibility?").ask()
     
@@ -108,12 +110,11 @@ def main():
         print(f"{Fore.YELLOW}[!] Exiting... You must accept the terms to use the tool.")
         sys.exit()
 
-    # 2. RICHIESTA TOKEN (Dopo l'accettazione)
-    clear() # Pulisce lo schermo per un look più pulito dopo il disclaimer
+    clear()
     print_header()
+
     token = input(f"{Fore.CYAN}[?] Enter Token: {Fore.WHITE}").strip()
     
-    # Gestione Intents sicura
     intents = None
     try:
         if hasattr(discord, 'Intents'):
@@ -137,15 +138,12 @@ def main():
         except Exception as e:
             print(f"\n{Fore.RED}[ERROR] {e}")
             return False
-
-    # 3. LOGICA DI LOGIN
-    # Prova come BOT (Default sicuro)
+        
     if not attempt_login(is_bot=True):
         print(f"\n{Fore.RED}[!] Login Failed: Standard Bot Token invalid.")
         
         is_user = questionary.confirm("Is this a User Token?").ask()
         if is_user:
-            # Qui procediamo perché il disclaimer generale è già stato accettato all'inizio
             print(f"{Fore.MAGENTA}[*] Logging in as User...")
             if not attempt_login(is_bot=False):
                 print(f"\n{Fore.RED}[CRITICAL ERROR] Could not login as User.")
