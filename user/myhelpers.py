@@ -4,7 +4,7 @@ from colorama import Fore, Style
 
 # Configs
 ScriptName = "DiscordGhoster"
-Version    = "1.0"
+Version    = "1.1"
 Author     = "rotafn"
 urls = {
     "Github": "https://github.com/fnicefire",
