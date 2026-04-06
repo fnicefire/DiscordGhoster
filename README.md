@@ -9,13 +9,16 @@
     <img src="https://img.shields.io/github/stars/fnicefire/DiscordGhoster?style=for-the-badge&color=5865F2&cacheSeconds=5" alt="Stars">
   </a>
   <a href="https://www.python.org/">
-    <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+    <img src="https://img.shields.io/badge/Python-3.12%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
   </a>
   <a href="https://discordpy.readthedocs.io/">
     <img src="https://img.shields.io/badge/discord.py-supported-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="discord.py">
   </a>
   <a href="DiscordGhoster/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+  </a>
+  <a href="https://discord.vortexnew.qzz.io">
+    <img src="https://img.shields.io/discord/your-server-id?style=for-the-badge&color=7289DA&logo=discord&logoColor=white" alt="Discord Server">
   </a>
 </p>
 
@@ -61,20 +64,37 @@ Using user tokens on Discord is against the [Discord Terms of Service](https://d
 git clone https://github.com/fnicefire/DiscordGhoster.git
 cd DiscordGhoster
 ```
-
-2. Install dependencies:
+2. Create a Virtual Environment (Read official documentation: [Python venv documentation](https://docs.python.org/3/library/venv.html))
 
 ```bash
-pip install -r requirements.txt
+python -m venv .venv
+```
+
+3. Install dependencies depending on which version you want to run:
+
+- bot
+```bash
+pip install -r bot/requirements.txt
+```
+- user
+```bash
+pip install -r user/requirements.txt
 ```
 
 ## Usage
 
 Run the script with:
 
+- bot
 ```bash
-python main.py
+python bot/main.py
 ```
+- user
+```bash
+python user/main.py
+```
+
+> Optionally, you can create separate venvs in bot/ and user/ if you want full isolation.
 
 At startup the tool:
 
