@@ -19,7 +19,7 @@
   </a>
   <a href="https://discord.vortexnew.qzz.io">
     <img src="https://img.shields.io/discord/1394391754077110363?style=for-the-badge&color=7289DA&logo=discord&logoColor=white" alt="Discord Server">
-  </a>
+  </a> 
 </p>
 
 ---
