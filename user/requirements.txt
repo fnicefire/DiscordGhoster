@@ -1,0 +1,5 @@
+questionary
+discord.py-self
+# Styling
+pyfiglet
+colorama

@@ -3,3 +3,9 @@
 
 # PyCache
 __pycache__
+
+bot/.venv
+bot/__pycache__
+
+user/.venv
+user/__pycache__

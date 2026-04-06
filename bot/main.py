@@ -93,63 +93,32 @@ class Ghoster(discord.Client):
 def main():
     print_header()
     
-    print(f"{Fore.RED}       LEGAL TERMINOLOGY & CRITICAL WARNING")
-    tos_link = get_clickable_text("Terms of Service (ToS).", "https://discord.com/terms")
-    author_link = get_clickable_text(Author, urls.get("Github", "#"))
+    ddp_link = get_clickable_text("Discord Developer Portal", "https://discord.com/developers/applications")
+    print(f"{Fore.CYAN}          DISCORD BOT CONFIGURATION")
+    print(f"{Fore.WHITE}Ensure you have created an application at {Fore.YELLOW}{ddp_link}")
+    print(f"{Fore.WHITE}and enabled the required {Fore.GREEN}Privileged Gateway Intents.\n")
 
-    print(f"{Fore.WHITE}This script {Fore.GREEN}ALLOWS{Fore.WHITE} the use of User Tokens (Self-bots),")
-    print(f"{Fore.WHITE}but you must know that this is {Fore.RED}ILLEGAL{Fore.WHITE} and strictly")
-    print(f"{Fore.WHITE}against Discord {Fore.YELLOW}{tos_link}")
-    print(f"{Fore.WHITE}Using this feature puts your account at {Fore.RED}HIGH RISK OF BAN.\n")
-    print(f"{Fore.WHITE}By proceeding, you agree that {Fore.MAGENTA}{author_link}{Fore.WHITE} is NOT responsible")
-    print(f"{Fore.WHITE}for any action taken by Discord against your account.\n")
+    token = input(f"{Fore.CYAN}[?] Enter Bot Token: {Fore.WHITE}").strip()
 
-    accept_risk = questionary.confirm("Do you accept the risks and responsibility?").ask()
-    
-    if not accept_risk:
-        print(f"{Fore.YELLOW}[!] Exiting... You must accept the terms to use the tool.")
-        sys.exit()
+    intents = discord.Intents.default()
+    intents.guilds = True
 
-    clear()
-    print_header()
-
-    token = input(f"{Fore.CYAN}[?] Enter Token: {Fore.WHITE}").strip()
-    
-    intents = None
-    try:
-        if hasattr(discord, 'Intents'):
-            intents = discord.Intents.default()
-            intents.guilds = True
-    except:
-        pass
-
-    def attempt_login(is_bot):
-        client_instance = Ghoster(intents=intents) if intents else Ghoster()
+    def attempt_bot_login():
+        client_instance = Ghoster(intents=intents)
         try:
-            if is_bot:
-                print(f"{Fore.YELLOW}[*] Attempting Bot Login...")
-                client_instance.run(token)
-            else:
-                print(f"{Fore.MAGENTA}[*] Attempting User Login (Self-bot mode)...")
-                client_instance.run(token, bot=False)
+            print(f"{Fore.YELLOW}[*] Attempting Bot Login...")
+            client_instance.run(token)
             return True
         except discord.LoginFailure:
+            print(f"\n{Fore.RED}[!] Error: Invalid Bot Token.")
             return False
         except Exception as e:
             print(f"\n{Fore.RED}[ERROR] {e}")
             return False
-        
-    if not attempt_login(is_bot=True):
-        print(f"\n{Fore.RED}[!] Login Failed: Standard Bot Token invalid.")
-        
-        is_user = questionary.confirm("Is this a User Token?").ask()
-        if is_user:
-            print(f"{Fore.MAGENTA}[*] Logging in as User...")
-            if not attempt_login(is_bot=False):
-                print(f"\n{Fore.RED}[CRITICAL ERROR] Could not login as User.")
-                print(f"{Fore.YELLOW}[i] Tip: Ensure 'discord.py-self' is installed.")
-        else:
-            print(f"{Fore.RED}[!] Check your token and try again.")
+
+    if not attempt_bot_login():
+        print(f"{Fore.RED}[!] Login failed. Please verify your token in the Developer Portal.")
+        sys.exit()
 
 # RUN
 if __name__ == "__main__":

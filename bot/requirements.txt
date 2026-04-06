@@ -1,6 +1,5 @@
 discord.py
 questionary
-discord.py-self
 # Styling
 pyfiglet
 colorama
